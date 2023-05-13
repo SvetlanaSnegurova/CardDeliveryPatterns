@@ -1,10 +1,7 @@
 package ru.netology;
 
-
 import com.github.javafaker.Faker;
 import lombok.Value;
-import org.jetbrains.annotations.Contract;
-import org.jetbrains.annotations.NotNull;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,9 +13,8 @@ public class DataGenerator {
     private DataGenerator() {
     }
 
-    public static @NotNull String generateDate(int days) {
-        String date = LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
-        return date;
+    public static String generateDate(int days) {
+       return  LocalDate.now().plusDays(days).format(DateTimeFormatter.ofPattern("dd.MM.yyyy"));
     }
 
     public static String generateCity() {
@@ -31,7 +27,7 @@ public class DataGenerator {
         return cites[new Random().nextInt(cites.length)];
     }
 
-    public static @NotNull String generateName(String locale) {
+    public static String generateName(String locale) {
         var faker = new Faker(new Locale(locale));
         return faker.name().lastName() + " " + faker.name().firstName();
     }
@@ -45,8 +41,7 @@ public class DataGenerator {
         private Registration() {
         }
 
-        @Contract("_ -> new")
-        public static @NotNull UserInfo generateUser(String locale) {
+        public static UserInfo generateUser(String locale) {
             return new UserInfo(generateCity(), generateName(locale), generatePhone(locale));
         }
     }
